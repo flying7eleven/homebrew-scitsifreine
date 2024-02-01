@@ -1,0 +1,22 @@
+name: verify-local-formula
+run-name: Verify local Formula
+
+on:
+  push:
+    branches-ignore: [ master ]
+    paths: [ 'Formula/scitsifreine.rb', '.github/workflows/*' ]
+  workflow_dispatch:
+
+jobs:
+  verify-local-formula:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest ]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: Homebrew/actions/setup-homebrew@master
+      - uses: actions/checkout@v3
+      - run: brew install --verbose ./Formula/scitsifreine.rb
+      - run: brew audit scitsifreine --strict
+      - run: brew test scitsifreine
+      - run: scitsifreine --version

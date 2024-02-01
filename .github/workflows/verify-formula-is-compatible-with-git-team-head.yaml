@@ -1,0 +1,21 @@
+name: verify-formula-is-compatible-with-scitsifreine-head
+run-name: Verify Formula is compatible with scitsifreine HEAD
+
+on:
+  schedule:
+    - cron: '30 16 * * *'
+  workflow_dispatch:
+
+jobs:
+  verify-formula:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest ]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: Homebrew/actions/setup-homebrew@master
+      - run: brew tap flying7eleven/scitsifreine
+      - run: brew install scitsifreine --HEAD --verbose
+      - run: brew audit scitsifreine --strict
+      - run: brew test scitsifreine
+      - run: scitsifreine --version

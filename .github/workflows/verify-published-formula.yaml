@@ -1,0 +1,23 @@
+name: verify-published-formula
+run-name: Verify published Formula
+
+on:
+  push:
+    branches: [ master ]
+    paths: [ 'Formula/scitsifreine.rb', '.github/workflows/*' ]
+  workflow_dispatch:
+
+jobs:
+  verify-formula:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest ]
+        formula_version: [ "", "--HEAD" ]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: Homebrew/actions/setup-homebrew@master
+      - run: brew tap flying7eleven/scitsifreine
+      - run: brew install scitsifreine ${{ matrix.formula_version }} --verbose
+      - run: brew audit scitsifreine --strict
+      - run: brew test scitsifreine
+      - run: scitsifreine --version
