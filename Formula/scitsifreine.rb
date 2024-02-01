@@ -7,6 +7,7 @@ class Scitsifreine < Formula
   sha256 "a789d6e8775a6dcd244d6f4b6f1353c0085d98403f924f067a52051a5cecdff0"
   license "MIT"
 
+  depends_on "ansible"
   depends_on "python"
 
   def install
