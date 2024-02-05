@@ -27,4 +27,5 @@ docker run --rm -i -t --user linuxbrew \
 ```
 
 ## Contribution
-The workflows and the Homebrew tap are forked from [git-team](https://github.com/hekmekk/homebrew-git-team).
+- The workflows and the Homebrew tap are forked from [git-team](https://github.com/hekmekk/homebrew-git-team).
+- The conversion script for requirements.txt to Homebrew Formulae is from [Justin O’Connor](https://justinoconnor.codes/2023/07/22/converting-pythons-requirements-txt-into-homebrew-formula-resources/).
