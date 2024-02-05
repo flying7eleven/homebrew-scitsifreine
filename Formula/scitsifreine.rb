@@ -5,12 +5,13 @@ class Scitsifreine < Formula
   homepage ""
   url "https://github.com/flying7eleven/scitsifreine.git",
       tag:      "0.1.1",
-      revision: "0772966dfea9dd99c1bad97df0d2c0bfad5d11c5"
+      revision: "70772532023c68896bf861a7280f67f45248f52e"
   sha256 "a789d6e8775a6dcd244d6f4b6f1353c0085d98403f924f067a52051a5cecdff0"
   license "MIT"
   head "https://github.com/flying7eleven/scitsifreine.git", branch: "main"
 
   depends_on "python"
+  depends_on "rust" => :build
 
   resource "ansible" do
     url "https://files.pythonhosted.org/packages/eb/ab/e6993e1608fa911ee84dd0f29f494064f3b7f4a277f99608c9421a7a5ed4/ansible-9.1.0.tar.gz"
@@ -82,6 +83,6 @@ class Scitsifreine < Formula
   end
 
   test do
-    system "#{bin}/scitsifreine", "--version"
+    assert_match /^scitsi \d\.\d\.\d.*/, shell_output("#{bin}/scitsifreine --version")
   end
 end
